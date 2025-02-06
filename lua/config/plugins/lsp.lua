@@ -1,3 +1,9 @@
+local configure_servers = {
+  "lua_ls",
+  "pyright",
+  "clangd"
+}
+
 return {
   {
     'neovim/nvim-lspconfig',
@@ -15,7 +21,9 @@ return {
       }
     },
     config = function()
-      require('lspconfig').lua_ls.setup {}
+      for _, server in pairs(configure_servers) do
+        require('lspconfig')[server].setup {}
+      end
     end
   }
 }
